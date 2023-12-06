@@ -8,46 +8,84 @@
     android:background="@color/black"
     tools:context=".NotesTakerActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_notes"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/imageView_save"
-                android:src="@drawable/ic_save"
-                android:padding="8dp"
-                android:background="@android:color/transparent"
-                android:layout_alignParentEnd="true"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"/>
-        </RelativeLayout>
-
-    </androidx.appcompat.widget.Toolbar>
 
     <EditText
         android:id="@+id/editText_title"
         android:hint="Title :"
         android:textColorHint="@color/white"
-        android:padding="8dp"
+        android:padding="6dp"
         android:textStyle="bold"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:singleLine="true"
         android:layout_width="match_parent"
-        android:layout_height="80dp"/>
+        android:layout_height="60dp"/>
 
     <EditText
         android:id="@+id/edittext_notes"
-        android:hint="Add Notes: "
+        android:hint="Add Notes : "
         android:textColorHint="@color/white"
         android:padding="8dp"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="normal"
         android:layout_width="match_parent"
-        android:layout_height="80dp"/>
+        android:layout_height="60dp"/>
+    <EditText
+        android:id="@+id/Agent"
+        android:hint="Agent :"
+        android:textColorHint="@color/white"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+    <EditText
+        android:id="@+id/dependencies"
+        android:hint="dependencies :"
+        android:textColorHint="@color/white"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        />
+    <TimePicker
+        android:id="@+id/timepicker_id"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:timePickerMode="spinner"
+        android:layout_marginTop="10dp"
+        android:numbersTextColor="@color/black"
+        android:background="@color/white"
+        android:layout_gravity="center"
+        />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/imageView_save"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_save"
+                android:padding="8dp"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                android:layout_centerInParent="true"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"/>
+
+        </RelativeLayout>
+
 
 </LinearLayout>

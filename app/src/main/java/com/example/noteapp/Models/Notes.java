@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity(tableName = "notes")
 
@@ -18,9 +19,30 @@ public class Notes implements Serializable {
     @ColumnInfo(name = "notes")
     String notes = "";
 
-
     @ColumnInfo(name = "date")
     String date = "";
+
+   /* @ColumnInfo(name = "entry_Date")
+    Date entry_Date;
+
+    @ColumnInfo(name = "entry_name")
+    String entry_time;
+
+    public Date getEntry_Date() {
+        return entry_Date;
+    }
+
+    public void setEntry_Date(Date entry_Date) {
+        this.entry_Date = entry_Date;
+    }
+
+    public String getEntry_time() {
+        return entry_time;
+    }
+
+    public void setEntry_time(String entry_time) {
+        this.entry_time = entry_time;
+    }*/
 
     @ColumnInfo(name = "pinned")
     boolean pinned = false;
