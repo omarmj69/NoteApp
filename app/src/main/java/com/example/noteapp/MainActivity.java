@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.example.noteapp.Adapters.NotesListAdapter;
 import com.example.noteapp.Database.RoomDB;
+import com.example.noteapp.Models.Agent;
+import com.example.noteapp.Models.Dependencies;
 import com.example.noteapp.Models.Notes;
 import com.google.android.material.R.id;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,12 +32,14 @@ public class MainActivity extends AppCompatActivity implements  PopupMenu.OnMenu
     RecyclerView recyclerView;
     NotesListAdapter notesListAdapter;
     List<Notes> notes = new ArrayList<>();
+    List<Dependencies> dependencies = new ArrayList<>();
+    List<Agent> agents = new ArrayList<>();
     RoomDB database;
     FloatingActionButton fab_add;
     SearchView searchView_home;
     Notes selectedNote;
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements  PopupMenu.OnMenu
         searchView_home = findViewById(R.id.searchView_home);
 
         database = RoomDB.getInstance(this);
+        dependencies = database.dependenciesDAO().getAll();
+        agents = database.agentDAO().getAll();
         notes = database.mainDAO().getAll();
 
     updateRecycler(notes);
@@ -90,17 +96,36 @@ public class MainActivity extends AppCompatActivity implements  PopupMenu.OnMenu
         if (requestCode == 101){
             if (resultCode == Activity.RESULT_OK){
                 Notes new_notes = (Notes) data.getSerializableExtra("note");
+                Dependencies new_Dependencies = (Dependencies) data.getSerializableExtra("dependencies");
+                Agent new_Agent = (Agent) data.getSerializableExtra("agent");
                 database.mainDAO().insert(new_notes);
                 notes.clear();
                 notes.addAll(database.mainDAO().getAll());
+                int maxnoteid = database.mainDAO().getmaxid();
+                new_Dependencies.setNote_id(maxnoteid);
+                database.dependenciesDAO().insert(new_Dependencies);
+                dependencies.clear();
+                dependencies.addAll(database.dependenciesDAO().getAll());
+                new_Agent.setNote_id(maxnoteid);
+                database.agentDAO().insert(new_Agent);
+                agents.clear();
+                agents.addAll(database.agentDAO().getAll());
                 notesListAdapter.notifyDataSetChanged();
             }
         } else if (requestCode == 102) {
             if (resultCode == Activity.RESULT_OK){
                 Notes new_notes = (Notes) data.getSerializableExtra("note");
+                Dependencies new_Dependencies = (Dependencies) data.getSerializableExtra("dependencies");
+                Agent new_Agent = (Agent) data.getSerializableExtra("agent");
                 database.mainDAO().update(new_notes.getId(), new_notes.getTitle(), new_notes.getNotes());
+                database.dependenciesDAO().update(new_Dependencies.getDependencies_id(), new_Dependencies.getName(),new_Dependencies.getNote_id());
+                database.agentDAO().update(new_Agent.getAgent_id(),new_Agent.getName(),new_Agent.getDescraption(),new_Agent.getNote_id());
                 notes.clear();
+                dependencies.clear();
+                agents.clear();
+                dependencies.addAll(database.dependenciesDAO().getAll());
                 notes.addAll(database.mainDAO().getAll());
+                agents.addAll(database.agentDAO().getAll());
                 notesListAdapter.notifyDataSetChanged();
 
             }
@@ -111,15 +136,17 @@ public class MainActivity extends AppCompatActivity implements  PopupMenu.OnMenu
     private void updateRecycler(List<Notes> notes) {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL));
-        notesListAdapter = new NotesListAdapter(MainActivity.this, notes,notesClickListener);
+        notesListAdapter = new NotesListAdapter(MainActivity.this, notes,dependencies,agents,notesClickListener);
         recyclerView.setAdapter(notesListAdapter);
     }
 
     private final NotesClickListener notesClickListener = new NotesClickListener() {
         @Override
-        public void onCclick(Notes notes) {
+        public void onCclick(Notes notes,Dependencies dependencies,Agent agent) {
             Intent intent = new Intent(MainActivity.this,NotesTakerActivity.class);
             intent.putExtra("old_note", notes);
+            intent.putExtra("old_dependencies", dependencies);
+            intent.putExtra("old_agent",agent);
             startActivityForResult(intent, 102);
 
         }

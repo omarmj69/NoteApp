@@ -7,6 +7,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.noteapp.Models.Agent;
 import com.example.noteapp.Models.Notes;
 
 import java.util.List;
@@ -14,9 +15,8 @@ import java.util.List;
 @Dao
 public interface MainDAO {
 
-@Insert(onConflict = REPLACE)
+    @Insert(onConflict = REPLACE)
     void insert(Notes notes);
-
     @Query("SELECT * FROM notes ORDER BY id DESC")
     List<Notes> getAll();
 
@@ -28,4 +28,8 @@ public interface MainDAO {
 
     @Query("UPDATE notes SET pinned = :pin WHERE ID = :id")
     void pin(int id, boolean pin);
+
+    @Query("SELECT MAX(id) FROM notes")
+    int getmaxid();
 }
+

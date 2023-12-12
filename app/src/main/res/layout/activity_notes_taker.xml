@@ -31,6 +31,10 @@
         android:textStyle="normal"
         android:layout_width="match_parent"
         android:layout_height="60dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <EditText
         android:id="@+id/Agent"
         android:hint="Agent :"
@@ -39,8 +43,21 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="normal"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        />
+        <EditText
+            android:id="@+id/descraption"
+            android:hint="descraption :"
+            android:textColorHint="@color/white"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            />
+    </LinearLayout>
     <EditText
         android:id="@+id/dependencies"
         android:hint="dependencies :"
@@ -50,9 +67,11 @@
         android:textSize="18sp"
         android:textStyle="normal"
         android:layout_width="match_parent"
-        android:layout_height="60dp"/>
+        android:layout_height="60dp"
+        />
 
     <DatePicker
+        android:id="@+id/datepicker"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
         android:layout_gravity="center"

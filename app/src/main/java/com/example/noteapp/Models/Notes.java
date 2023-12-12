@@ -22,27 +22,16 @@ public class Notes implements Serializable {
     @ColumnInfo(name = "date")
     String date = "";
 
-   /* @ColumnInfo(name = "entry_Date")
-    Date entry_Date;
+    @ColumnInfo(name = "entry_Date")
+    String entry_Date ="";
 
-    @ColumnInfo(name = "entry_name")
-    String entry_time;
-
-    public Date getEntry_Date() {
+    public String getEntry_Date() {
         return entry_Date;
     }
 
-    public void setEntry_Date(Date entry_Date) {
+    public void setEntry_Date(String entry_Date) {
         this.entry_Date = entry_Date;
     }
-
-    public String getEntry_time() {
-        return entry_time;
-    }
-
-    public void setEntry_time(String entry_time) {
-        this.entry_time = entry_time;
-    }*/
 
     @ColumnInfo(name = "pinned")
     boolean pinned = false;

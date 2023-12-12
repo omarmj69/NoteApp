@@ -5,11 +5,12 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Agent",foreignKeys = @ForeignKey(entity = Notes.class,parentColumns = "id",childColumns = "Agent_id",onDelete = ForeignKey.CASCADE))
+import java.io.Serializable;
 
-public class Agent {
+@Entity(tableName = "Agent",foreignKeys = @ForeignKey(entity = Notes.class,parentColumns = "id",childColumns = "note_id",onDelete = ForeignKey.CASCADE))
+
+public class Agent implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "Agent_id")
     int Agent_id =0;
 
     @ColumnInfo(name = "name")
@@ -17,6 +18,17 @@ public class Agent {
 
     @ColumnInfo(name = "descraption")
     String descraption = "";
+
+    @ColumnInfo(name = "note_id")
+    int note_id =0;
+
+    public int getNote_id() {
+        return note_id;
+    }
+
+    public void setNote_id(int note_id) {
+        this.note_id = note_id;
+    }
 
     public int getAgent_id() {
         return Agent_id;
